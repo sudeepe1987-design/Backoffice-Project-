@@ -385,41 +385,6 @@
     io.observe(block);
   }
 
-  function initStickyWordReveal() {
-    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var sections = qsa('[data-sticky-word-reveal]').map(function (section) {
-      return { section: section, pin: qs('.sticky-word-reveal__pin', section), words: qsa('.sticky-word-reveal__text .w', section) };
-    });
-    var pending = false;
-    function update() {
-      pending = false;
-      sections.forEach(function (item) {
-        if (!item.pin || !item.words.length) return;
-        item.section.classList.remove('is-static');
-        var rect = item.section.getBoundingClientRect();
-        var top = parseFloat(getComputedStyle(item.pin).top) || 0;
-        var range = rect.height - item.pin.getBoundingClientRect().height;
-        // A tall mobile panel cannot pin safely: keep its text readable.
-        var plain = motion.matches || range <= 1 || item.pin.offsetHeight + top > window.innerHeight;
-        item.section.classList.toggle('is-static', plain);
-        var progress = plain ? 1 : Math.max(0, Math.min(1, (top - rect.top) / range));
-        item.words.forEach(function (word, i) {
-          var amount = progress > i / item.words.length ? 1 : 0;
-          word.classList.toggle('is-lit', amount > 0);
-          word.style.opacity = String(0.15 + 0.85 * amount);
-        });
-      });
-    }
-    function schedule() {
-      if (!pending) { pending = true; requestAnimationFrame(update); }
-    }
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    motion.addEventListener('change', schedule);
-    if (document.fonts) document.fonts.ready.then(schedule);
-    update();
-  }
-
   function initContactForm() {
     initContactQueryParams();
     var form = qs('#contactForm');
@@ -499,6 +464,5 @@
     initServiceCards();
     initContactForm();
     initWordReveal();
-    initStickyWordReveal();
   });
 })();

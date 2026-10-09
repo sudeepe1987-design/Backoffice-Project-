@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="assets/images/logo-round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Individual Clients &mdash; Back Office Solutions</title>
   <meta name="description" content="Immigration documentation support for individual clients &mdash; organised files, document review, and submission-ready application packs.">
@@ -14,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/hero-flyers.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/eclipse-reveal.css">
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="assets/js/config.js" defer></script>
   <script src="assets/js/live-ticker.js" defer></script>
@@ -54,18 +56,14 @@
   <button type="button" class="enquire-popup-btn" id="enquirePopupBtn">ENQUIRE</button>
 
   <main id="main">
-<section class="sticky-word-reveal" data-sticky-word-reveal aria-labelledby="hero-heading">
+<section class="sticky-word-reveal" data-sticky-word-reveal data-eclipse-scope aria-labelledby="hero-heading">
       <div class="sticky-word-reveal__pin">
         <div class="container sticky-word-reveal__inner">
           <div class="sticky-word-reveal__copy">
             <span class="hero-badge">Immigration Documentation Support</span>
-            <h1 class="sticky-word-reveal__text" id="hero-heading">
-              <span class="w">Behind</span> <span class="w">every</span> <span class="w">successful</span> <span class="w">immigration</span> <span class="w">application</span> <span class="w">is</span> <span class="w">a</span> <span class="w">well-prepared</span> <span class="w is-teal">documentation</span> <span class="w">team.</span>
-              <span class="w">We're</span> <span class="w">it</span> <span class="w">&mdash;</span> <span class="w">working</span> <span class="w">quietly</span> <span class="w">behind</span> <span class="w">your</span> <span class="w">case.</span>
-              <span class="w is-accent">What</span> <span class="w is-accent">we</span> <span class="w is-accent">do:</span>
-              <span class="w">We</span> <span class="w">handle</span> <span class="w">documentation</span> <span class="w">end</span> <span class="w">to</span> <span class="w">end.</span>
-              <span class="w is-teal">Because</span> <span class="w is-teal">every</span> <span class="w is-teal">detail</span> <span class="w is-teal">matters.</span>
-            </h1>
+            <h1 class="sticky-word-reveal__text" id="hero-heading" data-eclipse-reveal>Behind every successful immigration application is a well-prepared documentation team.</h1>
+            <p class="sticky-word-reveal__support">We're it &mdash; working quietly behind your case.</p>
+            <p class="sticky-word-reveal__emphasis">BECAUSE EVERY DETAIL MATTERS.</p>
             <a class="glass-cta glass-cta--spotlight sticky-word-reveal__cta" href="#plan-eligibility-check">GET YOUR IMMIGRATION ELIGIBILITY AT &#8377;199 ONLY</a>
           </div>
           <aside class="workspace-panel" aria-label="Illustrative immigration case workflow">
@@ -240,5 +238,6 @@
       if (window.lucide) lucide.createIcons();
     });
   </script>
+  <script src="assets/js/eclipse-reveal.js" defer></script>
 </body>
 </html>

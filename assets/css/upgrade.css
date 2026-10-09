@@ -19,3 +19,8 @@ html{scroll-padding-top:110px}body{background:#0B1728}button,a,input,select,text
 .home-body .glass-cta.glass-cta--spotlight,.home-body .glass-cta.glass-cta--primary{background:linear-gradient(135deg,#7fd4de24,#ffffff08);color:#f4f8fa;border-color:#d9ff9990;backdrop-filter:blur(16px)}
 .bo-country:not(.active){left:calc(61% + var(--slot) * 12.5%);width:11.5%}@media(max-width:768px){.bo-country:not(.active){left:calc(12px + var(--slot) * 32.5%);width:calc(32.5% - 12px)}}
 .live-ticker__content{display:flex;flex-shrink:0;padding-left:0}.live-ticker__group{display:flex;flex-shrink:0;padding-left:20px}.live-ticker__group span{flex-shrink:0}.live-ticker[data-paused=true] .live-ticker__content{animation-play-state:paused}.live-ticker:hover .live-ticker__content,.live-ticker:focus-within .live-ticker__content{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.live-ticker__group[aria-hidden=true]{display:none}}
+/* Header logo: one entrance, then a restrained hover/focus response. */
+@keyframes bo-brand-enter{from{opacity:0;transform:translateY(6px) scale(.92)}to{opacity:1;transform:none}}
+.landing-brand__logo,.site-header .brand__logo{animation:bo-brand-enter .85s cubic-bezier(.2,.8,.2,1) both;transition:filter .35s ease,rotate .35s ease}
+.landing-brand-bar:hover .landing-brand__logo,.landing-brand-bar:focus-visible .landing-brand__logo,.site-header .brand:hover .brand__logo,.site-header .brand:focus-visible .brand__logo{rotate:-6deg;filter:drop-shadow(0 0 8px #7fd4de66)}
+@media(prefers-reduced-motion:reduce){.landing-brand__logo,.site-header .brand__logo{animation:none;transition:none;rotate:none!important}}
