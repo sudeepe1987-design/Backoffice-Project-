@@ -644,7 +644,7 @@ body.landing-body::before {
 .bo-bg--light { background: radial-gradient(1300px 900px at 50% -10%, #1e4a86 0%, #14305c 50%, #0e1f3a 100%); opacity: 1; }
 .bo-bg--deep { background: radial-gradient(1300px 900px at 50% 110%, #101f38 0%, #0B1728 60%); opacity: 0; }
 .landing-body .landing-page-shell, .landing-body .landing-hero { background: transparent; }
-.landing-body .landing-hero__kb, .landing-body .landing-hero__ribbons, .landing-body .hero-flyers { display: none; }
+/* Retain the original hero imagery, ribbons and flyer transitions. */
 .bo-hero-pin { padding-top: 4rem; }
 .landing-hero__content { transition: none; will-change: transform; }
 .bo-intro-space { height: 22svh; width: 100%; flex-shrink: 0; }
