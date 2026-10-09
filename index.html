@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="assets/css/hero-flyers.css">
   <link rel="stylesheet" href="assets/css/landing.css">
   <link rel="stylesheet" href="assets/css/landing-navigation.css">
-  <script src="assets/js/live-ticker.js" defer></script>
   <script src="assets/js/travel-cursor.js" defer></script>
   <script src="assets/js/landing-navigation.js" defer></script>
   <link rel="stylesheet" href="assets/css/upgrade.css">
@@ -23,14 +22,18 @@
   <script src="assets/js/landing-text-reveal.js" defer></script>
   <script src="assets/js/upgrade.js" defer></script>
 </head>
-<body class="landing-body has-live-ticker">
+<body class="landing-body">
+  <div class="bo-bg bo-bg--light" aria-hidden="true"></div>
+  <div class="bo-bg bo-bg--deep" aria-hidden="true"></div>
+  <header class="bo-morph-bar" aria-label="Back Office">
+    <span id="boMorphSlot"><img src="assets/images/logo_earth_animated.gif" alt="Back Office"></span>
+  </header>
   <a class="sr-only" href="#main">Skip to content</a>
   <div class="landing-page-shell">
-  <header class="landing-top">
 
-  </header>
 
   <main id="main" class="landing-hero" aria-label="Back Office Solutions landing">
+    <div class="bo-hero-pin">
     <div class="landing-hero__kb" aria-hidden="true"></div>
     <div class="landing-hero__ribbons" aria-hidden="true">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +72,25 @@
     </div>
 
     <div class="landing-hero__content">
+      <div class="bo-intro-space" aria-hidden="true"></div>
 
+      <div class="bo-hero-seq" id="boHeroSeq" aria-label="Back Office statements">
+        <div class="bo-hero-set is-active" data-set="0">
+          <span class="line">GLOBAL IMMIGRATION</span>
+          <span class="line dim">DOCUMENTATION</span>
+          <span class="line">DONE RIGHT.</span>
+        </div>
+        <div class="bo-hero-set" data-set="1" aria-hidden="true">
+          <span class="line dim">FOR INDIVIDUAL CLIENTS</span>
+          <span class="line">AND AGENCIES</span>
+          <span class="line dim">WORLDWIDE.</span>
+        </div>
+        <div class="bo-hero-set" data-set="2" aria-hidden="true">
+          <span class="line">WE PREPARE EVERY FILE.</span>
+          <span class="line dim">YOU STAY CLIENT-FACING.</span>
+          <span class="line">EVERY DETAIL MATTERS.</span>
+        </div>
+      </div>
       <p class="landing-glass-caption landing-reveal is-visible" id="landingGlassCaption" data-eclipse-reveal data-reveal-hero>Global Immigration &amp; Visa documentation network</p>
 
       <div class="toggles-wrapper" role="group" aria-label="Choose client type">
@@ -96,9 +117,11 @@
       <span>Explore more</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg>
     </a>
+    </div>
   </main>
   </div>
 
+  <div class="bo-footer-travel">
   <footer class="bo-footer" id="landingFooter">
  <nav aria-label="Footer"><a href="index.html">Home</a><a href="services.html">Services</a><a href="countries.html">Countries</a><a href="home-individual.html#plans">Plans &amp; Pricing</a><a href="about.html">About</a><a href="refer-earn.html">Refer &amp; Earn</a><a href="intelligence.html">Immigration Brief</a><a href="contact.html">Contact</a></nav>
  <div class="bo-footer-wordmark" data-eclipse-reveal>BACK OFFICE</div>
@@ -106,6 +129,7 @@
  <a class="bo-footer-return" data-back-to-top href="#main">Return to page ↑</a>
  <div class="bo-footer-bottom"><small>© 2026 Back Office Solutions · Immigration documentation support.</small><div class="bo-footer-legal"><a href="privacy.html">Privacy</a><a href="cookies.html">Cookies</a><a href="terms.html">Terms</a></div></div>
 </footer>
+  </div>
 
   <script>
     (function () {
@@ -142,5 +166,9 @@
       }
     })();
   </script>
+  <img id="boMorphBig" class="bo-morph-logo" src="assets/images/logo_earth_animated.gif" alt="Back Office Solutions">
+  <span class="bo-brand-tag bo-brand-tag--mid">Documented by us</span>
+  <span class="bo-brand-tag bo-brand-tag--corner">owned by you</span>
+  <script src="assets/js/logo-morph.js" defer></script>
 </body>
 </html>

@@ -558,3 +558,126 @@ body.landing-body::before {
   .landing-body .landing-footer-reveal { display: none; }
 }
 .landing-body img { max-width: 100%; }
+
+/* === ECLIPSE-STYLE LOGO MORPH === */
+.bo-morph-bar {
+  position: fixed;
+  top: var(--landing-ticker-height, 36px); left: 0; right: 0;
+  height: 56px; z-index: 9990;
+  display: flex; align-items: center; padding: 0 20px;
+  background: linear-gradient(180deg, rgba(11,23,40,.92), rgba(11,23,40,.55));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(160,210,223,.1);
+}
+#boMorphSlot { display: block; height: 36px; opacity: 0; }
+#boMorphSlot img { height: 100%; width: auto; display: block; filter: drop-shadow(0 0 10px rgba(80,140,255,.35)); }
+.bo-morph-logo {
+  width: min(92vw, 1080px); height: auto; display: block;
+  opacity: 0; transform: scale(.95); transform-origin: center;
+  transition: opacity .9s ease, transform 1s cubic-bezier(.16,1,.3,1);
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 28px rgba(80,140,255,.3));
+}
+.bo-morph-logo.in { opacity: 1; transform: scale(1); }
+.bo-morph-space { width: min(92vw, 1080px); max-width: 100%; flex-shrink: 0; }
+.bo-morph-logo.is-floating { position: fixed; z-index: 9991; pointer-events: none; margin: 0; }
+@media (max-width: 640px) {
+  .bo-morph-bar { height: 48px; padding: 0 14px; }
+  #boMorphSlot { height: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bo-morph-logo { opacity: 1; transform: none; transition: none; }
+  #boMorphSlot { opacity: 1; }
+}
+
+/* Pinned statement sequence: backgrounds and controls share the pin. */
+.landing-body .landing-hero {
+  height: 220svh; min-height: 220svh; padding: 0;
+  display: block; overflow: visible;
+}
+.bo-hero-pin {
+  position: sticky; top: 0; min-height: 100svh;
+  box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+  padding: calc(var(--landing-ticker-height, 36px) + 3.5rem) 1rem 3rem;
+  isolation: isolate; overflow-x: clip; overflow-y: visible;
+}
+.landing-hero__content { padding: 0; }
+.bo-morph-logo { max-height: 18svh; object-fit: contain; }
+.bo-morph-space { height: 18svh; }
+.bo-hero-seq { position: relative; width: 100%; display: grid; min-height: clamp(180px, 25vw, 300px); }
+.bo-hero-set {
+  grid-area: 1 / 1; display: flex; flex-direction: column;
+  justify-content: center; gap: .05em; pointer-events: none;
+  visibility: hidden;
+}
+.bo-hero-set.is-active, .bo-hero-set.is-leaving { visibility: visible; }
+.bo-hero-seq .line {
+  display: block; font: 500 clamp(2rem, 5.1vw, 6.5rem)/1.02 "Inter Tight", sans-serif;
+  letter-spacing: -.03em; color: #F4F8FA; text-transform: uppercase;
+  opacity: 0; transform: translateY(45px);
+  transition: opacity .45s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.bo-hero-seq .line.dim { color: rgba(182,201,217,.45); }
+.bo-hero-set.is-active .line { opacity: 1; transform: none; }
+.bo-hero-set.is-leaving .line { opacity: 0; transform: translateY(-45px); transition-duration: .35s, .44s; }
+.bo-hero-set.is-active .line:nth-child(2), .bo-hero-set.is-leaving .line:nth-child(2) { transition-delay: .08s; }
+.bo-hero-set.is-active .line:nth-child(3), .bo-hero-set.is-leaving .line:nth-child(3) { transition-delay: .16s; }
+.bo-footer-travel { padding-top: 45svh; padding-bottom: 45svh; }
+#landingFooter { transform-origin: left bottom; will-change: transform; border-radius: 24px; }
+@media (max-width: 640px) {
+  .bo-hero-pin { padding-bottom: 2rem; }
+  .bo-hero-seq { min-height: 210px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-body .landing-hero { height: auto; min-height: 100svh; }
+  .bo-hero-pin { position: static; }
+  .bo-hero-set:not([data-set="0"]) { display: none; }
+  .bo-hero-set[data-set="0"] { visibility: visible; }
+  .bo-hero-seq .line { opacity: 1; transform: none; transition: none; }
+  .bo-footer-travel { padding: 0; }
+  #landingFooter { transform: none !important; border-radius: 0 !important; }
+}
+
+/* Choreography v2: clean layered gradient and a timed logo intro. */
+.landing-body { --landing-ticker-height: 0px; background: #0B1728; }
+.bo-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity 1.4s ease; }
+.bo-bg--light { background: radial-gradient(1300px 900px at 50% -10%, #1e4a86 0%, #14305c 50%, #0e1f3a 100%); opacity: 1; }
+.bo-bg--deep { background: radial-gradient(1300px 900px at 50% 110%, #101f38 0%, #0B1728 60%); opacity: 0; }
+.landing-body .landing-page-shell, .landing-body .landing-hero { background: transparent; }
+.landing-body .landing-hero__kb, .landing-body .landing-hero__ribbons, .landing-body .hero-flyers { display: none; }
+.bo-hero-pin { padding-top: 4rem; }
+.landing-hero__content { transition: none; will-change: transform; }
+.bo-intro-space { height: 22svh; width: 100%; flex-shrink: 0; }
+.bo-morph-bar { top: 14px; left: 16px; right: auto; height: 42px; padding: 0; border: 0; background: transparent; backdrop-filter: none; }
+#boMorphSlot { height: 42px; transition: opacity .25s ease; }
+#boMorphSlot img { height: 42px; }
+#boMorphBig {
+  position: fixed; z-index: 9991; top: 5vh; left: 50%;
+  width: min(94vw, 1500px); height: 30svh; max-height: none; object-fit: contain;
+  margin: 0; transform: translateX(-50%) scale(.95); opacity: 0;
+  transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1);
+  pointer-events: none;
+}
+#boMorphBig.in { opacity: 1; transform: translateX(-50%) scale(1); }
+#boMorphBig.is-docked { transform: translate(calc(-50% + var(--bo-dx)), var(--bo-dy)) scale(var(--bo-s)); transition: transform 1.15s cubic-bezier(.22,1,.36,1), opacity .25s ease; }
+#boMorphBig.is-finished { opacity: 0; }
+.bo-brand-tag { position: fixed; z-index: 9992; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #b6c9d9; opacity: 0; transition: opacity .9s ease; pointer-events: none; }
+.bo-brand-tag--mid { top: 35svh; right: 24%; }
+.bo-brand-tag--corner { top: 20svh; right: 3vw; }
+.bo-brand-tag.in { opacity: 1; }
+.bo-brand-tag.is-out { opacity: 0; transition-duration: .5s; }
+@media(max-width:640px) {
+  .bo-brand-tag { font-size: 10px; letter-spacing: .1em; }
+  .bo-brand-tag--mid { top: 30svh; right: 22%; }
+  .bo-brand-tag--corner { top: 9svh; right: 3vw; }
+  #boMorphBig { height: 25svh; }
+  .bo-intro-space { height: 23svh; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #boMorphBig, .bo-brand-tag, .bo-intro-space { display: none; }
+  #boMorphSlot { opacity: 1; transition: none; }
+  .bo-bg { transition: none; }
+  .bo-bg--light { opacity: 0; }
+  .bo-bg--deep { opacity: 1; }
+  .landing-hero__content { transform: none !important; }
+}
