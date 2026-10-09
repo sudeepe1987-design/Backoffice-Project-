@@ -27,10 +27,7 @@
   <a class="sr-only" href="#main">Skip to content</a>
   <div class="landing-page-shell">
   <header class="landing-top">
-    <a class="landing-brand-bar" href="index.html" aria-label="Back Office Solutions — home">
-      <img class="landing-brand__logo" src="assets/images/logo-round.png" alt="Back Office" width="40" height="40">
-      <span class="landing-brand__name">backoffice</span>
-    </a>
+
   </header>
 
   <main id="main" class="landing-hero" aria-label="Back Office Solutions landing">
@@ -72,9 +69,7 @@
     </div>
 
     <div class="landing-hero__content">
-      <a class="landing-logo-link" href="index.html">
-        <img class="landing-logo" src="assets/images/hero-logo-4.png" alt="Back Office Solutions" width="1885" height="442">
-      </a>
+
       <p class="landing-glass-caption landing-reveal is-visible" id="landingGlassCaption" data-eclipse-reveal data-reveal-hero>Global Immigration &amp; Visa documentation network</p>
 
       <div class="toggles-wrapper" role="group" aria-label="Choose client type">
@@ -119,7 +114,6 @@
       if (!reduceMotion) {
         var hero = document.querySelector('.landing-hero');
         var flyers = document.querySelectorAll('.flyer-wrap');
-        var logo = document.querySelector('.landing-logo');
         if (hero && flyers.length) {
           var targetX = 0, targetY = 0, currentX = 0, currentY = 0;
           hero.addEventListener('pointermove', function (event) {
@@ -141,10 +135,6 @@
               flyer.style.setProperty('--mouse-x', (currentX * depth * 4) + 'px');
               flyer.style.setProperty('--mouse-y', (currentY * depth * 3) + 'px');
             });
-            if (logo) {
-              logo.style.setProperty('--logo-x', (currentX * 7) + 'px');
-              logo.style.setProperty('--logo-y', (currentY * 5) + 'px');
-            }
             requestAnimationFrame(tick);
           }
           tick();

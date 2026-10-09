@@ -63,7 +63,7 @@
       format: 'Video or phone-call guidance with checklist and document-organisation support.',
       desc: 'You remain responsible for every document and submission. We guide categories, naming, sequencing and readiness checks.',
       included: [
-        'Your personal document checklist', 'Which documents go in each category', 'File names and folder organisation', 'Video or phone consultation', 'Help understanding supporting evidence', 'Basic checks before you proceed'
+        'Personal document checklist', 'Document categories', 'File names and folders', 'Video or phone guidance', 'Supporting evidence guidance', 'Readiness check'
       ],
       excluded: [
         'Preparing documents on your behalf',
@@ -445,21 +445,43 @@
     grid.className='bo-plans-track'; grid.tabIndex=0;
     grid.setAttribute('aria-label','Swipe or use arrow keys to browse plans');
     var dots=document.createElement('div');dots.className='bo-plan-dots';dots.setAttribute('aria-label','Choose service plan');wrap.append(dots);
-    cards.forEach(function(card,i){var dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label','Show '+card.querySelector('h3').textContent);dot.onclick=function(){grid.scrollTo({left:i*step(),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};dots.append(dot);});
+    cards.forEach(function(card,i){var dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label','Show '+card.querySelector('h3').textContent);dot.onclick=function(){go(i);};dots.append(dot);});
     cards.forEach(function(card){card.classList.remove('js-reveal');});
     var prev=controls.querySelector('button'),next=controls.querySelector('button:last-child'),status=controls.querySelector('span');
-    function step(){return cards[0].getBoundingClientRect().width+16;}
+    var index=0, stride=0, touch=null;
+    var motion=matchMedia('(prefers-reduced-motion: reduce)');
+    function visibleCount(){return window.innerWidth>=1100?4:window.innerWidth>=640?2:1;}
+    function maxIndex(){return Math.max(0,cards.length-visibleCount());}
+    function step(){return (grid.clientWidth+16)/visibleCount();}
     function paint(){
-      var idx=Math.round(grid.scrollLeft/step());
-      var visible=Math.max(1,Math.round(grid.clientWidth/step()));
-      prev.disabled=grid.scrollLeft<2;next.disabled=grid.scrollLeft+grid.clientWidth>=grid.scrollWidth-2;
-      Array.from(dots.children).forEach(function(dot,i){dot.setAttribute('aria-current',String(i===idx));});
-      status.textContent=(idx+1)+'–'+Math.min(cards.length,idx+visible)+' of '+cards.length;
+      index=Math.max(0,Math.min(maxIndex(),Math.round(grid.scrollLeft/step())));
+      prev.disabled=index===0; next.disabled=index===maxIndex();
+      // For an even visible set, highlight the right-hand middle card.
+      var center=index+Math.floor(visibleCount()/2);
+      cards.forEach(function(card,i){card.classList.toggle('is-carousel-center',i===center);});
+      Array.from(dots.children).forEach(function(dot,i){dot.setAttribute('aria-current',String(i===index));});
+      status.textContent=(index+1)+'–'+Math.min(cards.length,index+visibleCount())+' of '+cards.length;
     }
-    function move(delta){grid.scrollBy({left:delta*step(),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+    function go(target){grid.scrollTo({left:Math.max(0,Math.min(maxIndex(),target))*step(),behavior:motion.matches?'instant':'smooth'});}
+    function move(delta){go(index+delta);}
+    function resize(){
+      var keep=Math.max(0,Math.min(maxIndex(),index));
+      stride=step(); grid.scrollTo({left:keep*stride,behavior:'instant'});paint();
+    }
     prev.onclick=function(){move(-1);};next.onclick=function(){move(1);};
     grid.addEventListener('keydown',function(e){if(e.target!==grid)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}});
-    grid.addEventListener('scroll',paint,{passive:true});new ResizeObserver(paint).observe(grid);paint();
+    grid.addEventListener('touchstart',function(e){if(e.touches.length===1)touch={x:e.touches[0].clientX,y:e.touches[0].clientY,index:index};else touch=null;},{passive:true});
+    grid.addEventListener('touchend',function(e){
+      if(!touch||!e.changedTouches.length)return;
+      var dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;
+      if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))go(touch.index+(dx<0?1:-1));
+      touch=null;
+    },{passive:true});
+    grid.addEventListener('touchcancel',function(){touch=null;},{passive:true});
+    grid.addEventListener('scroll',paint,{passive:true});
+    window.addEventListener('resize',resize);
+    if('ResizeObserver' in window)new ResizeObserver(resize).observe(grid);
+    resize();
   }
 
   function initIndividualPlans() {

@@ -24,3 +24,28 @@ html{scroll-padding-top:110px}body{background:#0B1728}button,a,input,select,text
 .landing-brand__logo,.site-header .brand__logo{animation:bo-brand-enter .85s cubic-bezier(.2,.8,.2,1) both;transition:filter .35s ease,rotate .35s ease}
 .landing-brand-bar:hover .landing-brand__logo,.landing-brand-bar:focus-visible .landing-brand__logo,.site-header .brand:hover .brand__logo,.site-header .brand:focus-visible .brand__logo{rotate:-6deg;filter:drop-shadow(0 0 8px #7fd4de66)}
 @media(prefers-reduced-motion:reduce){.landing-brand__logo,.site-header .brand__logo{animation:none;transition:none;rotate:none!important}}
+
+/* Match the plans viewport counts and keep one card visually centered. */
+.bo-plans-track { touch-action: pan-y; }
+.bo-plans-track > .plan-card { flex-basis: calc((100% - 48px) / 4); }
+@media (min-width: 640px) and (max-width: 1099.98px) {
+  .bo-plans-track > .plan-card { flex-basis: calc((100% - 16px) / 2); }
+}
+@media (max-width: 639.98px) {
+  .bo-plans-track > .plan-card { flex-basis: 100%; }
+}
+.bo-plans-track > .plan-card.is-carousel-center {
+  outline: 1px solid rgba(217,255,153,.45);
+  outline-offset: -1px;
+  box-shadow: inset 0 0 24px rgba(217,255,153,.06), 0 8px 18px rgba(0,0,0,.18);
+  transform: scale(1.005);
+}
+@media (max-width: 640px) {
+  .home-body .hero { min-height: 100svh; height: auto; overflow-x: clip; overflow-y: visible; padding-bottom: 5.5rem; }
+  .home-body .sticky-word-reveal { min-height: 100svh; }
+  .home-body .sticky-word-reveal__pin { position: static; min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bo-plans-track { scroll-behavior: auto; }
+  .bo-plans-track > .plan-card { transition: none; }
+}

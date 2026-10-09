@@ -542,3 +542,19 @@ body.landing-body::before {
   .landing-hero { height: auto; padding-bottom: 6.5rem; }
   .toggles-wrapper { margin-top: 1.6rem; }
 }
+
+/* Small phones: let all landing choices remain in normal scroll flow. */
+@media (max-width: 640px) {
+  .landing-hero {
+    min-height: 100svh;
+    height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+    padding-top: calc(var(--landing-ticker-height) + 3.5rem);
+    padding-bottom: 5.5rem;
+  }
+  .toggles-wrapper { margin-top: 1.6rem; }
+  .landing-glass-caption { margin-top: .6rem; }
+  .landing-body .landing-footer-reveal { display: none; }
+}
+.landing-body img { max-width: 100%; }
