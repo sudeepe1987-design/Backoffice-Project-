@@ -1,0 +1,37 @@
+/* Natural section heights remain scrollable before the next section covers them. */
+.bo-stack { position: relative; isolation: isolate; }
+.bo-stack > section {
+  position: sticky;
+  top: var(--bo-stack-top, 0px);
+  isolation: isolate;
+  background-color: #0B1728;
+  transform-origin: center top;
+  transition: none;
+}
+.bo-stack > .section--stack { min-height: 100svh; box-sizing: border-box; }
+.bo-stack > .sticky-word-reveal { position: relative; top: auto; }
+.bo-stack .bo-stack-title { transition: none; }
+.bo-stack--flat > * {
+  position: static !important;
+  transform: none !important;
+  filter: none !important;
+}
+.bo-stack--flat .bo-stack-title { transform: none !important; opacity: 1 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .bo-stack > section { position: static; min-height: 0; transform: none !important; filter: none !important; }
+  .bo-stack .bo-stack-title { transform: none !important; opacity: 1 !important; }
+}
+
+/* Existing reveal heroes retain their own scroll range and internal pin. */
+.bo-stack > .sticky-word-reveal { min-height: 200svh; }
+@media (max-width: 640px) { .bo-stack > .sticky-word-reveal { min-height: 100svh; } }
+@media (prefers-reduced-motion: reduce) { .bo-stack > .sticky-word-reveal { min-height: 0; } }
+
+.bo-stack--single > section { position: relative; min-height: 0; }
+.bo-stack .contact-layout > *, .bo-stack .form__group { min-width: 0; }
+.bo-stack input, .bo-stack select, .bo-stack textarea { min-width: 0; max-width: 100%; box-sizing: border-box; }
+
+.bo-stack .bo-calendar-scene > * { min-width: 0; }
+@media (max-width: 768px) { .bo-stack .bo-calendar-scene { grid-template-columns: minmax(0, 1fr); } }
+
+.bo-stack.bo-shell > section > h1 { max-width: 850px; font-size: clamp(2.3rem,5vw,4.2rem); font-weight: 500; letter-spacing: -.04em; }
