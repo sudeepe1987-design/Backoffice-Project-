@@ -1,0 +1,33 @@
+{
+  "country": "australia",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "Student visa conditions and financial evidence",
+      "source": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Graduate work pathways",
+      "source": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "SkillSelect 189/491 invitation rounds",
+      "source": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/invitation-rounds",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "State nomination and skilled pathways including subclass 190",
+      "source": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}

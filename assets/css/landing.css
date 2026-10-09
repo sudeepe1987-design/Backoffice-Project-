@@ -1,0 +1,544 @@
+/* Landing gate — quiet central brand, animated routes at the edges. */
+
+@import "ticker.css";
+@import "travel-cursor.css";
+
+:root {
+  --bg-color: #0B1728;
+  --hero-bg: #0B1728;
+  --card-bg: #11263d;
+  --text: #eaf2f7;
+  --text-muted: #b6c9d9;
+  --border: rgba(160, 210, 223, 0.17);
+  --bo-midnight: var(--bg-color);
+  --bo-navy: var(--bg-color);
+  --bo-lime: #D9FF99;
+  --bo-blue: #123D5A;
+  --bo-accent-blue: #609cf0;
+  --bo-teal: #7fd4de;
+  --bo-surface: var(--card-bg);
+  --bo-white: #FFFFFF;
+  --bo-text: var(--text);
+  --bo-muted: var(--text-muted);
+  --bo-border: var(--border);
+  --navy: var(--bo-navy);
+  --deep-navy: var(--bo-navy);
+  --teal: #7fd4de;
+  --blue: var(--bo-blue);
+  --light: var(--bo-surface);
+  --white: var(--bo-white);
+  --muted: var(--bo-muted);
+  --line: var(--bo-border);
+  --landing-bg: var(--bg-color);
+  --landing-panel: rgba(18, 48, 82, 0.72);
+  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --bo-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+html {
+  background-color: var(--bg-color);
+}
+
+body.landing-body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+body.landing-body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at -9% 25%, rgba(45, 170, 183, 0.17), transparent 75%),
+    radial-gradient(ellipse 57% 70% at 108% 16%, rgba(75, 99, 216, 0.2), transparent 70%),
+    radial-gradient(ellipse 62% 48% at 50% 115%, rgba(60, 107, 179, 0.12), transparent 75%);
+}
+body.landing-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.035;
+  background-image: var(--bo-grain);
+  background-size: 180px 180px;
+  mix-blend-mode: soft-light;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ----- Landing top bar: logo + small menu ----- */
+.landing-top {
+  position: fixed;
+  top: var(--landing-ticker-height);
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 4vw, 4.5rem);
+  background: linear-gradient(180deg, rgba(11, 23, 40, 0.97), rgba(11, 23, 40, 0.68));
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(160, 210, 223, 0.12);
+}
+.landing-brand-bar {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.2rem 0;
+  text-decoration: none;
+  color: #F4F8FA;
+  background: transparent;
+  border: 0;
+}
+.landing-mini-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 2.4vw, 2rem);
+  flex-wrap: wrap;
+}
+.landing-mini-nav a {
+  text-decoration: none;
+  color: rgba(244, 248, 250, 0.88);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.landing-mini-nav a:hover,
+.landing-mini-nav a:focus-visible {
+  color: var(--bo-lime);
+}
+.landing-brand__logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  border: 0;
+}
+.landing-brand__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  color: #F4F8FA;
+  line-height: 1;
+  white-space: nowrap;
+}
+.landing-logo-link {
+  display: flex;
+  justify-content: center;
+  line-height: 0;
+  width: 100%;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.landing-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.landing-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----- Hero: central calm, travel imagery in the periphery ----- */
+.landing-hero {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding: calc(var(--landing-ticker-height) + 5rem) 1rem 4rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  isolation: isolate;
+  background-color: var(--hero-bg);
+}
+
+/* Cursor trail layer covers the hero; must not steal toggle clicks */
+.landing-hero .bo-cursor-trail {
+  pointer-events: none;
+}
+
+.landing-hero__kb {
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 3% 52%, rgba(22, 166, 166, 0.18), transparent 38%),
+    radial-gradient(circle at 95% 36%, rgba(84, 101, 211, 0.19), transparent 38%),
+    linear-gradient(150deg, #0B1728 6%, #10233d 50%, #0B1728 93%);
+  animation: landingKenBurns 28s ease-in-out infinite alternate;
+}
+
+/* Glass flight-path ribbons — behind logo/toggles */
+.landing-hero__ribbons {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.landing-hero__ribbons svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.landing-hero__ribbons .ribbon {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 2 9;
+  animation: ribbonFlow 24s linear infinite;
+}
+.landing-hero__ribbons .ribbon--teal {
+  stroke: rgba(127, 212, 222, 0.72);
+}
+.landing-hero__ribbons .ribbon--violet {
+  stroke: rgba(154, 163, 249, 0.6);
+  animation-duration: 32s;
+  animation-direction: reverse;
+}
+.landing-hero__ribbons .ribbon--cobalt {
+  stroke: rgba(96, 165, 250, 0.64);
+  animation-duration: 28s;
+}
+.landing-hero__ribbons .glass-band {
+  fill: url(#landingGlassGrad);
+  opacity: 0.8;
+}
+@keyframes ribbonFlow {
+  to { stroke-dashoffset: -120; }
+}
+
+.landing-hero__kb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 23, 40, 0.3) 0%, transparent 36%, rgba(11, 23, 40, 0.42) 100%),
+    radial-gradient(ellipse at 50% 52%, rgba(11, 23, 40, 0.76) 0%, rgba(11, 23, 40, 0.5) 26%, transparent 70%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes landingKenBurns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.07) translate3d(-1.2%, -0.6%, 0); }
+}
+
+/* Flyer stack sits behind content; soft light vignette keeps logo readable */
+.landing-hero .hero-flyers {
+  z-index: 1;
+  opacity: 0.52;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 34%, transparent 66%, #000 100%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 34%, transparent 66%, #000 100%);
+}
+
+.landing-hero .flyer-wrap img {
+  filter:
+    blur(0.5px)
+    saturate(1.15)
+    drop-shadow(0 22px 32px rgba(1, 9, 21, 0.4));
+}
+
+.landing-hero__content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  padding: 2.5rem 0;
+  pointer-events: none;
+}
+
+.landing-hero__content > * {
+  pointer-events: auto;
+}
+
+.landing-logo {
+  width: clamp(320px, 25vw, 480px);
+  max-width: min(100%, 480px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  transform: translate(var(--logo-x, 0px), var(--logo-y, 0px));
+  filter: drop-shadow(0 18px 24px rgba(1, 7, 20, 0.5));
+  animation:
+    landingLogoIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both,
+    landingLogoFloat 6s ease-in-out 2.2s infinite;
+}
+
+@keyframes landingLogoIn {
+  from {
+    opacity: 0;
+    transform: translate(0, 16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes landingLogoFloat {
+  0%, 100% { transform: translate(var(--logo-x, 0px), var(--logo-y, 0px)); }
+  50% { transform: translate(var(--logo-x, 0px), calc(var(--logo-y, 0px) - 5px)); }
+}
+
+.landing-glass-caption {
+  margin: 1rem auto 0;
+  max-width: min(42ch, 90vw);
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  color: #d4e9f0;
+  position: relative;
+  z-index: 2;
+  animation: landingLogoIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* ----- Premium toggles (compact glassmorphism) ----- */
+.toggles-wrapper {
+  position: relative;
+  z-index: 40;
+  background: none;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  text-align: left;
+  margin: clamp(2.2rem, 5vh, 4.25rem) 1rem 0;
+  pointer-events: auto;
+  animation: landingLogoIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+}
+
+.premium-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 1.05rem 1.2rem;
+  min-width: 228px;
+  min-height: 72px;
+  border-radius: 16px;
+  border: 1px solid rgba(143, 200, 220, 0.28);
+  background: linear-gradient(145deg, rgba(34, 72, 107, 0.58), rgba(14, 37, 64, 0.76));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 36px rgba(1, 11, 25, 0.22), inset 0 1px rgba(255,255,255,.1);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.premium-toggle:hover {
+  background: linear-gradient(145deg, rgba(44, 92, 130, 0.8), rgba(17, 51, 77, 0.9));
+  border-color: rgba(127, 212, 222, 0.7);
+  transform: translateY(-3px);
+}
+
+.premium-toggle:has(.toggle-checkbox:checked) {
+  background: rgba(48, 100, 122, 0.9);
+  border-color: var(--bo-lime);
+}
+
+.premium-toggle:focus-within .toggle-track {
+  outline: none;
+}
+.premium-toggle:focus-within { outline: 2px solid var(--bo-lime); outline-offset: 3px; }
+
+.toggle-checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+}
+
+.toggle-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  pointer-events: none;
+  background: rgba(11, 23, 40, 0.7);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 3px rgba(13, 17, 23, 0.16);
+  border: 1px solid rgba(160, 210, 223, 0.4);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-track {
+  background: var(--bo-lime);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-color: rgba(217, 255, 153, 0.45);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(180deg, #ffffff, #eef3f8);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(13, 17, 23, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.45, 0.64, 1);
+  z-index: 2;
+}
+
+.toggle-thumb::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 103, 214, 0.35), rgba(18, 48, 82, 0.18));
+}
+
+.toggle-checkbox:checked + .toggle-track .toggle-thumb {
+  transform: translateX(20px);
+}
+
+.indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: rgba(234, 242, 247, 0.6);
+  z-index: 1;
+}
+
+.indicator.on { left: 7px; }
+.indicator.off { right: 6px; }
+
+.toggle-checkbox:checked + .toggle-track .indicator.on {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: none;
+}
+
+.toggle-label {
+  color: #e8f4f8;
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  font-family: var(--font-body);
+}
+
+@media (max-width: 640px) {
+  .landing-top { padding: 0.7rem 1rem; gap: .55rem; }
+  .landing-brand__logo { width: 26px; height: 26px; }
+  .landing-brand__name { font-size: 1.2rem; }
+  .landing-mini-nav { gap: .7rem; }
+  .landing-mini-nav a { font-size: .63rem; letter-spacing: .02em; }
+  .landing-hero { padding: calc(var(--landing-ticker-height) + 5rem) 1rem 2rem; }
+  .landing-hero__content { padding: 0; }
+  .landing-logo { width: min(86vw, 390px); }
+  .landing-glass-caption { margin-top: .85rem; }
+  .landing-logo, .landing-glass-caption, .toggles-wrapper {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .toggles-wrapper {
+    width: min(100%, 360px);
+    flex-direction: column;
+    gap: .7rem;
+    margin-top: 2.5rem;
+  }
+  .premium-toggle { width: 100%; min-width: 0; min-height: 64px; }
+  .landing-hero__ribbons {
+    opacity: 0.35;
+    inset: 0 -35%;
+  }
+  .landing-hero .hero-flyers { opacity: .25; }
+}
+@media (max-width: 370px) {
+  .landing-brand__name { display: none; }
+  .landing-mini-nav a { font-size: .65rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-hero__kb,
+  .landing-logo,
+  .landing-glass-caption,
+  .toggles-wrapper,
+  .landing-hero__ribbons .ribbon {
+    animation: none !important;
+  }
+  .toggle-track,
+  .toggle-thumb {
+    transition: none !important;
+  }
+}
+
+/* Reserve room for Explore more; keep decorative layers clipped. */
+.landing-body img { max-width: 100%; }
+@media (max-width: 640px), (max-height: 500px) {
+  .landing-hero { height: auto; padding-bottom: 6.5rem; }
+  .toggles-wrapper { margin-top: 1.6rem; }
+}

@@ -1,0 +1,33 @@
+{
+  "country": "canada",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "Study permits, caps and proof of funds",
+      "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Post-graduation work rights and work hours",
+      "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work.html",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "Express Entry: CEC, PNP, FSWP and category-based rounds",
+      "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Provincial pathways and programme requirements",
+      "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "country": "europe",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "Study and post-study permissions by EU country",
+      "source": "https://immigration-portal.ec.europa.eu/index_en",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "Germany EU Blue Card and salary thresholds",
+      "source": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Germany Opportunity Card",
+      "source": "https://www.make-it-in-germany.com/en/visa-residence/opportunity-card",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Country-specific EU pathways and quotas",
+      "source": "https://immigration-portal.ec.europa.eu/index_en",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}

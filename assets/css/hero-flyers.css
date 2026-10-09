@@ -1,0 +1,115 @@
+/* =========================================================
+   Shared multi-flyer hero stack (Ken Burns companion)
+   Used by landing (index) and home-individual
+   Blur kept light (≤1.5px) for logo/text readability
+   ========================================================= */
+
+.hero-flyers {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flyer-wrap {
+  position: absolute;
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+  transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
+  animation: skudoCardFloat 9s ease-in-out 1.5s infinite;
+}
+
+.flyer-wrap img {
+  display: block;
+  width: min(720px, 52vw);
+  height: auto;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter:
+    blur(1.2px)
+    drop-shadow(0 18px 26px rgba(15, 35, 55, 0.13))
+    drop-shadow(0 3px 8px rgba(15, 35, 55, 0.07));
+  animation: skudoFlyerEntrance 2.15s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.flyer-wrap.from-right img {
+  animation-name: skudoFlyerEntranceRight;
+}
+
+.f1  { top: -4%;  left: -6%; }
+.f2  { top: 18%;  left: -8%; }
+.f3  { top: 46%;  left: -10%; }
+.f4  { top: 70%;  left: -2%; }
+.f5  { top: 82%;  left: 22%; }
+.f6  { top: 54%;  left: 16%; }
+.f7  { top: -2%;  right: -8%; }
+.f8  { top: 22%;  right: -10%; }
+.f9  { top: 48%;  right: -12%; }
+.f10 { top: 72%;  right: -4%; }
+.f11 { top: 84%;  right: 18%; }
+.f12 { top: 36%;  left: 34%; }
+
+.f1 img  { --op: 0.58; --sc: 0.86; animation-delay: 0.15s; }
+.f2 img  { --op: 0.50; --sc: 0.80; animation-delay: 0.35s; }
+.f3 img  { --op: 0.38; --sc: 0.78; animation-delay: 0.55s; }
+.f4 img  { --op: 0.68; --sc: 0.90; animation-delay: 0.25s; }
+.f5 img  { --op: 0.46; --sc: 0.82; animation-delay: 0.45s; }
+.f6 img  { --op: 0.28; --sc: 0.72; animation-delay: 0.70s; }
+.f7 img  { --op: 0.56; --sc: 0.84; animation-delay: 0.20s; }
+.f8 img  { --op: 0.64; --sc: 0.88; animation-delay: 0.30s; }
+.f9 img  { --op: 0.34; --sc: 0.76; animation-delay: 0.60s; }
+.f10 img { --op: 0.76; --sc: 0.92; animation-delay: 0.40s; }
+.f11 img { --op: 0.48; --sc: 0.80; animation-delay: 0.35s; }
+.f12 img { --op: 0.22; --sc: 0.68; animation-delay: 0.80s; }
+
+@keyframes skudoFlyerEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-140px, 120px, 0) rotate(-62deg) skew(15deg, -5deg) scale(0.55);
+  }
+  72% { opacity: var(--op, 1); }
+  100% {
+    opacity: var(--op, 1);
+    transform: rotate(-31deg) skew(15deg, -5deg) scale(var(--sc, 0.85));
+  }
+}
+
+@keyframes skudoFlyerEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(140px, 120px, 0) rotate(-62deg) skew(15deg, -5deg) scale(0.55);
+  }
+  72% { opacity: var(--op, 1); }
+  100% {
+    opacity: var(--op, 1);
+    transform: rotate(-31deg) skew(15deg, -5deg) scale(var(--sc, 0.85));
+  }
+}
+
+@keyframes skudoCardFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+
+@media (max-width: 768px) {
+  .flyer-wrap img { width: min(420px, 70vw); }
+  .f6, .f12, .f3, .f9 { display: none; }
+}
+
+@media (max-width: 520px) {
+  .f4, .f5, .f6, .f10, .f11, .f12 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyer-wrap,
+  .flyer-wrap img {
+    animation: none !important;
+  }
+  .flyer-wrap img {
+    opacity: var(--op, 0.45);
+    transform: rotate(-31deg) skew(15deg, -5deg) scale(var(--sc, 0.85));
+    filter: blur(1.2px) drop-shadow(0 18px 26px rgba(15, 35, 55, 0.13));
+  }
+}

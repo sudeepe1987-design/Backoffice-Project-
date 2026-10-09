@@ -1,0 +1,27 @@
+{
+  "country": "ireland",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "Study permission, graduate permission and working conditions",
+      "source": "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "Critical Skills and General Employment Permits",
+      "source": "https://www.enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/permit-types/",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Employment permit policy and processing",
+      "source": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}

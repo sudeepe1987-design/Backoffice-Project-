@@ -1,0 +1,78 @@
+/* Shared Immigration Brief ticker — landing + site pages */
+:root {
+  --live-ticker-height: 36px;
+  --landing-ticker-height: var(--live-ticker-height);
+}
+
+.header-fixed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #0B1728;
+}
+
+.live-ticker {
+  background: #008779;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  height: var(--live-ticker-height);
+  overflow: hidden;
+}
+
+.live-ticker__badge {
+  background: #00b3a1;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.live-ticker__content {
+  white-space: nowrap;
+  animation: bo-ticker-marquee 25s linear infinite;
+  padding-left: 20px;
+}
+
+.live-ticker__content span {
+  margin-right: 40px;
+  color: #FFFFFF;
+}
+
+@keyframes bo-ticker-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+body.has-live-ticker.landing-body {
+  padding-top: 0;
+}
+
+body.has-live-ticker:not(.landing-body) {
+  padding-top: var(--live-ticker-height);
+}
+
+body.has-live-ticker:not(.landing-body) .site-header {
+  top: var(--live-ticker-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-ticker__content {
+    animation: none;
+    white-space: normal;
+    padding: 0 16px;
+    line-height: 1.35;
+  }
+  .live-ticker__content span[aria-hidden="true"] {
+    display: none;
+  }
+}

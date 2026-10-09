@@ -1,0 +1,27 @@
+{
+  "country": "united-states",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "F-1 OPT and STEM extensions",
+      "source": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "H-1B caps and registration",
+      "source": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-1b-specialty-occupations",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "PERM certification and processing",
+      "source": "https://www.dol.gov/agencies/eta/foreign-labor/programs/permanent",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}

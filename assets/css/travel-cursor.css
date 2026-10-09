@@ -1,0 +1,125 @@
+/* Native cursor stays immediate; decorative layers never capture clicks. */
+:root {
+  /* The paper plane's nose and the integer hotspot are both exactly (23, 2). */
+  --bo-cursor-plane: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M23 2L3 10L11 14L15 22Z' fill='%23FFF8F0' stroke='%23071426' stroke-width='1' stroke-linejoin='round'/%3E%3Cpath d='M11 14L23 2' fill='none' stroke='%23071426' stroke-width='.8'/%3E%3C/svg%3E") 23 2, auto;
+  --bo-cursor-halo-size: 18px;
+  --bo-cursor-halo-size-hover: 30px;
+}
+
+.bo-cursor-halo,
+.bo-cursor-trail,
+.bo-cursor-trail__dot {
+  pointer-events: none !important;
+  user-select: none;
+}
+
+.bo-cursor-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483646;
+  width: var(--bo-cursor-halo-size);
+  height: var(--bo-cursor-halo-size);
+  margin: calc(var(--bo-cursor-halo-size) / -2) 0 0 calc(var(--bo-cursor-halo-size) / -2);
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid rgba(127, 212, 222, 0.55);
+  background: transparent;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  /* Hide immediately on text/forms; only entering a click target eases. */
+  transition: width 0.22s ease, height 0.22s ease, margin 0.22s ease;
+  will-change: transform;
+}
+
+.bo-cursor-halo.is-hover {
+  width: var(--bo-cursor-halo-size-hover);
+  height: var(--bo-cursor-halo-size-hover);
+  margin: calc(var(--bo-cursor-halo-size-hover) / -2) 0 0 calc(var(--bo-cursor-halo-size-hover) / -2);
+  opacity: 1;
+  transition: width 0.22s ease, height 0.22s ease, margin 0.22s ease, opacity 0.15s ease;
+}
+
+.bo-cursor-trail {
+  /* Both hero types are positioned containers. Clip without changing the hero. */
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  border-radius: inherit;
+  contain: paint;
+}
+
+.bo-cursor-trail__dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: rgba(168, 232, 238, 0.5);
+  opacity: 0.5;
+  animation: boTrailFade 0.5s ease-out forwards;
+}
+
+@keyframes boTrailFade {
+  to {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.bo-travel-cursor,
+  html.bo-travel-cursor body {
+    cursor: var(--bo-cursor-plane);
+  }
+
+  html.bo-travel-cursor p,
+  html.bo-travel-cursor li,
+  html.bo-travel-cursor h1,
+  html.bo-travel-cursor h2,
+  html.bo-travel-cursor h3,
+  html.bo-travel-cursor h4,
+  html.bo-travel-cursor h5,
+  html.bo-travel-cursor h6,
+  html.bo-travel-cursor .sticky-word-reveal__text,
+  html.bo-travel-cursor .hero-navy-lead,
+  html.bo-travel-cursor .plan-card__desc,
+  html.bo-travel-cursor .plan-card__purpose {
+    cursor: text;
+  }
+
+  html.bo-travel-cursor a[href],
+  html.bo-travel-cursor .glass-cta,
+  html.bo-travel-cursor [role="button"],
+  html.bo-travel-cursor summary,
+  html.bo-travel-cursor .premium-toggle {
+    cursor: var(--bo-cursor-plane);
+  }
+
+  /* Let the browser choose each control's native cursor, not a blanket I-beam. */
+  html.bo-travel-cursor input,
+  html.bo-travel-cursor textarea,
+  html.bo-travel-cursor select,
+  html.bo-travel-cursor option,
+  html.bo-travel-cursor button,
+  html.bo-travel-cursor label,
+  html.bo-travel-cursor button *,
+  html.bo-travel-cursor label * {
+    cursor: auto;
+  }
+
+  html.bo-travel-cursor [contenteditable]:not([contenteditable="false"]),
+  html.bo-travel-cursor [contenteditable]:not([contenteditable="false"]) * {
+    cursor: text;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .bo-cursor-halo,
+  .bo-cursor-trail {
+    display: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

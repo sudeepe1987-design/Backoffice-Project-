@@ -1,0 +1,6 @@
+.env*
+tests/
+scripts/
+docs/
+README.md
+*.log

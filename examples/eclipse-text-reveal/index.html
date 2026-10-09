@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scroll text reveal — Back Office</title>
+  <link rel="stylesheet" href="reveal.css">
+  <script src="reveal.js" defer></script>
+  <style>
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f4f4;color:#080808;font-family:Arial,sans-serif}
+    body.dark{background:#0B1728;color:#f4f8fa}.dark .er-text{--er-muted:.13}
+    header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4vw;border-bottom:1px solid #8884}
+    header a{color:inherit;text-decoration:none;font-weight:700;letter-spacing:-.05em;font-size:1.2rem}
+    button{font:inherit;border:1px solid #8888;border-radius:30px;padding:12px 18px;background:transparent;color:inherit;cursor:pointer}
+    button:focus-visible,a:focus-visible{outline:3px solid #729ddf;outline-offset:5px}
+    .intro{min-height:65svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:7vw 4vw;max-width:800px}
+    .eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}.intro h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;font-weight:500;letter-spacing:-.045em;margin:18px 0}
+    .intro p{max-width:430px;line-height:1.6;color:inherit;opacity:.65}.intro a{color:inherit;text-underline-offset:5px;font-size:.85rem}
+    .reveal-section{padding:8vh 4vw 12vh;max-width:1600px;margin:auto}
+    .outro{min-height:65svh;padding:10vh 4vw;display:flex;flex-direction:column;justify-content:center;border-top:1px solid #8884}
+    .outro p{max-width:500px;font-size:clamp(1.2rem,2.5vw,2rem);line-height:1.3}.outro a{color:inherit}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header><a href="#top">BACK OFFICE / MOTION STUDY</a><button type="button" id="theme" aria-pressed="false">Dark theme</button></header>
+  <main id="top">
+    <section class="intro">
+      <span class="eyebrow">01 — Scroll-controlled typography</span>
+      <h1>A quieter transition.<br>A stronger message.</h1>
+      <p>Scroll slowly. Each letter gains colour as it moves through the viewport. Scroll back to reverse the effect.</p>
+      <a href="#reveal">Explore the animation ↓</a>
+    </section>
+    <section class="reveal-section" id="reveal" aria-label="Documentation philosophy">
+      <h2 data-eclipse-reveal>Behind every<br>successful application.<span class="er-indent">A team that<br>gets every detail right.<span class="er-last">Your next chapter.<br>Our attention to detail.</span></span></h2>
+    </section>
+    <section class="outro"><span class="eyebrow">Independent recreation</span><p>No animation library. No scroll hijacking. Responsive text with a reduced-motion fallback.</p><a href="#top">Back to the start ↑</a></section>
+  </main>
+  <script>
+    document.getElementById('theme').addEventListener('click',function(){
+      const dark=document.body.classList.toggle('dark');
+      this.setAttribute('aria-pressed',String(dark));this.textContent=dark?'Light theme':'Dark theme';
+      dispatchEvent(new Event('reveal:refresh'));
+    });
+  </script>
+</body>
+</html>

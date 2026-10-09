@@ -1,0 +1,20 @@
+const {test,beforeEach,afterEach}=require('node:test');const assert=require('node:assert/strict');
+const enquiry=require('../api/enquiry'),auth=require('../api/auth'),settings=require('../api/settings');
+const saved={...process.env},originalFetch=global.fetch;
+beforeEach(()=>{Object.assign(process.env,{SITE_URL:'https://example.test',RESEND_API_KEY:'test-key',ENQUIRY_FROM:'Test <sender@example.test>',ENQUIRY_TO:'team@example.test',TURNSTILE_SITE_KEY:'test-site',TURNSTILE_SECRET_KEY:'test-secret',SUPABASE_URL:'https://auth.example.test',SUPABASE_ANON_KEY:'test-anon'});});
+afterEach(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in saved))delete process.env[k];Object.assign(process.env,saved);});
+function req(body={},method='POST'){return {method,headers:{origin:'https://example.test','content-type':'application/json'},body};}
+function res(){return {headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(data){this.data=data;return this;}};}
+const valid=()=>({formType:'contact',name:'Test person',phone:'1234567890',email:'test@example.test',message:'Test enquiry',turnstileToken:'test-token'});
+test('cross-origin requests are rejected before delivery',async()=>{const q=req(valid());q.headers.origin='https://evil.test';const r=res();global.fetch=()=>assert.fail('No network allowed');await enquiry(q,r);assert.equal(r.code,403);});
+test('missing delivery credentials fail closed',async()=>{delete process.env.RESEND_API_KEY;const r=res();await enquiry(req(valid()),r);assert.equal(r.code,503);});
+test('invalid email is rejected',async()=>{const r=res();await enquiry(req({...valid(),email:'bad'}),r);assert.equal(r.code,400);});
+test('oversized requests are rejected',async()=>{const r=res();await enquiry(req({...valid(),message:'x'.repeat(20000)}),r);assert.equal(r.code,413);});
+test('invalid challenge cannot send mail',async()=>{global.fetch=async()=>({ok:true,json:async()=>({success:false})});const r=res();await enquiry(req(valid()),r);assert.equal(r.code,400);});
+test('challenge from another hostname cannot send mail',async()=>{global.fetch=async()=>({ok:true,json:async()=>({success:true,hostname:'evil.test'})});const r=res();await enquiry(req(valid()),r);assert.equal(r.code,400);});
+test('email provider failure is not reported as success',async()=>{global.fetch=async url=>url.includes('siteverify')?{ok:true,json:async()=>({success:true,hostname:'example.test'})}:{ok:false,json:async()=>({message:'invalid key'})};const r=res();await enquiry(req(valid()),r);assert.equal(r.code,502);});
+test('only accepted provider responses report success; preferred date is preserved',async()=>{let sent;global.fetch=async(url,options)=>{if(url.includes('siteverify'))return{ok:true,json:async()=>({success:true,hostname:'example.test'})};sent=JSON.parse(options.body);return{ok:true,json:async()=>({id:'message-id'})};};const r=res();await enquiry(req({...valid(),preferredDate:'2026-10-20'}),r);assert.equal(r.code,200);assert.match(sent.text,/2026-10-20/);assert.equal(sent.reply_to,'test@example.test');});
+test('anonymous account requests receive 401',async()=>{const r=res();await auth(req({},'GET'),r);assert.equal(r.code,401);});
+test('failed OTP does not create a cookie',async()=>{global.fetch=async()=>({ok:false,json:async()=>({})});const r=res();await auth(req({action:'verify',email:'test@example.test',token:'123456'}),r);assert.equal(r.code,401);assert.equal(r.headers['Set-Cookie'],undefined);});
+test('verified OTP creates a secure HttpOnly bounded session',async()=>{global.fetch=async()=>({ok:true,json:async()=>({access_token:'test.jwt.signature',expires_in:7200})});const r=res();await auth(req({action:'verify',email:'test@example.test',token:'123456'}),r);assert.equal(r.code,200);assert.match(r.headers['Set-Cookie'],/Secure; HttpOnly; SameSite=Lax; Max-Age=3600/);assert.equal(r.data.access_token,undefined);});
+test('settings do not expose secrets',()=>{const r=res();settings(req({},'GET'),r);assert.equal(r.data.authReady,true);assert(!JSON.stringify(r.data).includes('test-secret'));assert(!JSON.stringify(r.data).includes('test-key'));});

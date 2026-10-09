@@ -1,0 +1,33 @@
+{
+  "country": "united-kingdom",
+  "auditStatus": "pending",
+  "verifiedAt": null,
+  "students": [
+    {
+      "title": "Student visa funds and work conditions",
+      "source": "https://www.gov.uk/student-visa",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Graduate Route rules",
+      "source": "https://www.gov.uk/graduate-visa",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ],
+  "workers": [
+    {
+      "title": "Skilled Worker eligibility and salary thresholds",
+      "source": "https://www.gov.uk/skilled-worker-visa",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    },
+    {
+      "title": "Certificates of Sponsorship and allocations",
+      "source": "https://www.gov.uk/uk-visa-sponsorship-employers/certificates-of-sponsorship",
+      "summary": "Current rules require an official manual audit.",
+      "scope": "Check the official source for current eligibility, dates, thresholds and programme limits."
+    }
+  ]
+}
