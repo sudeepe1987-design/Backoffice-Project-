@@ -14,7 +14,7 @@
     var dest=slot.getBoundingClientRect();
     big.style.setProperty('--bo-dx',(dest.left+dest.width/2-innerWidth/2)+'px');
     big.style.setProperty('--bo-dy',(dest.top+dest.height/2-top-h/2)+'px');
-    big.style.setProperty('--bo-s',String(dest.height/Math.max(1,h)));
+    big.style.setProperty('--bo-s',String(Math.min(dest.width/Math.max(1,w),dest.height/Math.max(1,h))));
   }
   function setSequence(next){
     if(next===requested&&!motion.matches)return;
