@@ -1,7 +1,7 @@
-.lx-logo { position: fixed; top: 14px; left: 16px; z-index: 9995; display: flex; align-items: center; height: 34px; }
-.lx-logo-half { height: 34px; width: auto; display: block; }
-.lx-logo-o { width: 34px; height: 34px; margin: 0 2px; flex: none; }
-.lx-logo-o svg { width: 100%; height: 100%; display: block; }
+.lx-logo { position: fixed; top: 14px; left: 16px; z-index: 9995; display: flex; align-items: center; height: auto; }
+
+
+
 .lx-drift { animation: lxdrift 24s linear infinite; }
 @keyframes lxdrift { to { transform: translateX(-100px); } }
 
@@ -80,3 +80,5 @@ body.footer-pip-open #landingFooter { transform: scale(1) !important; transform-
 .landing-body .landing-hero { height: 220svh; min-height: 220svh; }
 .lx-pin { position: sticky; top: 0; height: 100svh; }
 @media(prefers-reduced-motion:reduce) { .landing-body .landing-hero { height: auto; min-height: 100svh; } .lx-pin { position: relative; } }
+
+.lx-logo-image { display: block; width: 220px; max-width: calc(100vw - 32px); height: auto; }

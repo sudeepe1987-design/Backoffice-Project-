@@ -181,13 +181,10 @@
       ctx.beginPath();
       ctx.rect(-o.w / 2, -o.h / 2, o.w, o.h);
       ctx.clip();
+      // Soften neighbors optically; never tint the supplied poster artwork.
+      var blur = S.reduced ? 0 : Math.min(3, Math.max(0, o.dist - 0.25) * 1.2) * fit;
+      ctx.filter = blur > 0 ? 'blur(' + blur.toFixed(2) + 'px)' : 'none';
       ctx.drawImage(o.c.img, -o.w / 2, -o.h / 2, o.w, o.h);
-      /* blur falloff for neighbors, sharp center */
-      if (o.dist > 0.25) {
-        ctx.globalAlpha = o.fade * clamp((o.dist - 0.25) * 0.55, 0, 0.55);
-        ctx.fillStyle = '#0B1728';
-        ctx.fillRect(-o.w / 2, -o.h / 2, o.w, o.h);
-      }
       ctx.restore();
     });
 
