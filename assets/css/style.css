@@ -1,7 +1,7 @@
 /* =========================================================
    Back Office Solutions — shared design system
    Midnight #0B1728 · Teal · Cobalt · Violet accents · Lime CTA #D9FF99
-   Headings: Inter Tight 500 · Body: Inter
+   Headings: Space Grotesk 500 · Body: Inter
    ========================================================= */
 
 @import "ticker.css";
@@ -38,7 +38,7 @@
   --shadow: 0 18px 40px rgba(2, 12, 26, 0.27);
   --radius: 14px;
   --font: "Inter", system-ui, sans-serif;
-  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --bo-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   --header-h: 78px;
@@ -306,7 +306,7 @@ p { margin: 0 0 1em; }
   display: block;
 }
 .brand__name {
-  font-family: "Inter Tight", Inter, system-ui, sans-serif;
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
   font-weight: 500;
   font-size: 1.05rem;
   letter-spacing: -0.02em;
@@ -2956,3 +2956,7 @@ p { margin: 0 0 1em; }
   .sticky-word-reveal { min-height: 0; }
   .sticky-word-reveal__pin { position: static; min-height: 0; }
 }
+
+:root { --font-display: "Space Grotesk", "Inter", system-ui, sans-serif; --font-body: "Inter", system-ui, sans-serif; }
+body, .section__lead, .form__label, .plan-card p, .msg-card p, .status-list, .landing-menu__footnote, .bo-foot-legal, .bo-brandtag { font-family: var(--font-body); }
+h1, h2, h3, h4, .section__title, .page-hero h1, .hero-docs__title, .workspace-hero__copy h1, .landing-footer h2, .bo-foot-grid h2, .bo-panel h2, .bo-shell > h1 { font-family: var(--font-display); font-weight: 500; }

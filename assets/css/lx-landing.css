@@ -1,0 +1,82 @@
+.lx-logo { position: fixed; top: 14px; left: 16px; z-index: 9995; display: flex; align-items: center; height: 34px; }
+.lx-logo-half { height: 34px; width: auto; display: block; }
+.lx-logo-o { width: 34px; height: 34px; margin: 0 2px; flex: none; }
+.lx-logo-o svg { width: 100%; height: 100%; display: block; }
+.lx-drift { animation: lxdrift 24s linear infinite; }
+@keyframes lxdrift { to { transform: translateX(-100px); } }
+
+.landing-body .landing-hero { height: 220svh; min-height: 220svh; padding: 0; display: block; overflow: visible; }
+.lx-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; place-items: center;
+  background: radial-gradient(120% 90% at 50% -10%, #16345f 0%, #0F2447 45%, #0B1728 100%); }
+
+
+
+.lx-name { position: absolute; z-index: 6; left: 50%; bottom: 19.5svh; top: auto;
+  transform: translateX(-50%); font: 600 12px "Space Grotesk", sans-serif;
+  letter-spacing: .22em; text-transform: uppercase; color: #F4F8FA; mix-blend-mode: normal;
+  opacity: 1; pointer-events: none; white-space: nowrap; }
+.lx-nav { position: absolute; z-index: 6; left: 50%; bottom: 25svh; transform: translateX(-50%);
+  display: flex; gap: clamp(10px, 1.6vw, 22px); flex-wrap: wrap; justify-content: center; max-width: 92vw; }
+.lx-nav a { color: rgba(234,242,247,.5); text-decoration: none; font-size: 10px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; }
+.lx-nav a.is-active { color: #D9FF99; }
+.lx-foot { position: absolute; z-index: 6; left: 0; right: 0; bottom: 3.5svh; text-align: center; }
+
+.lx-travel { padding-top: 45svh; padding-bottom: 45svh; }
+#landingFooter { transform-origin: right bottom; will-change: transform;
+  transition: transform .95s cubic-bezier(.22,1,.36,1), border-radius .95s ease; }
+body.footer-pip #landingFooter { transform: scale(.3) !important; transform-origin: right bottom; border-radius: 22px; }
+body.footer-pip-open #landingFooter { transform: scale(1) !important; transform-origin: right bottom; border-radius: 0; }
+
+@media (max-width: 640px) {
+  
+  .lx-name { bottom: 22svh; font-size: 12px; }
+  .lx-nav { bottom: 27.5svh; }
+  .lx-foot { bottom: 3svh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-body .landing-hero { height: auto; min-height: 100svh; }
+  .lx-pin { position: relative; }
+  .lx-travel { padding: 0; }
+  #landingFooter { transform: none !important; border-radius: 0 !important; }
+}
+
+/* Country names lift out blurred, then rise into focus from below. */
+.lx-name { transition: opacity .35s ease, transform .38s cubic-bezier(.22,1,.36,1), filter .38s ease; }
+.lx-name.is-out { opacity: 0; transform: translate(-50%, -10px); filter: blur(6px); }
+.lx-name.is-in { opacity: 0; transform: translate(-50%, 10px); filter: blur(6px); }
+@media (prefers-reduced-motion: reduce) { .lx-name { transition: none; } }
+
+/* Fit the requested vertical order to the current caption and pill metrics. */
+
+.lx-nav { width: 92vw; }
+.lx-foot { padding: 0 16px; box-sizing: border-box; }
+.lx-foot .landing-glass-caption { margin: 0 auto 18px; opacity: 1; transform: none; }
+.lx-foot .toggles-wrapper { margin: 0 auto; }
+@media (max-width: 640px) {
+  .lx-nav { gap: 8px 12px; }
+  .lx-foot .landing-glass-caption { font-size: 11px; line-height: 1.35; margin-bottom: 8px; }
+  .lx-foot .toggles-wrapper { gap: 8px; }
+  .lx-foot .bo-path { padding: 8px 14px 8px 20px; }
+}
+
+#lxHero { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; touch-action: pan-y; }
+
+/* Compact, centered client choices beneath the hero caption. */
+.lx-foot { display: flex; flex-direction: column; align-items: center; }
+.lx-foot .toggles-wrapper { display: flex; flex-direction: row; justify-content: center; align-items: center; width: auto; max-width: 100%; gap: 8px; }
+.lx-foot .bo-path { width: auto; min-width: 0; gap: 7px; padding: 7px 8px 7px 13px; }
+.lx-foot .bo-path__label { font-size: .62rem; letter-spacing: .05em; white-space: nowrap; }
+.lx-foot .bo-path__icon { width: 22px; height: 22px; }
+.lx-foot .bo-path__icon svg { width: 12px; height: 12px; }
+@media(max-width:640px) {
+  .lx-foot .toggles-wrapper { gap: 6px; }
+  .lx-foot .bo-path { padding: 7px 6px 7px 9px; gap: 5px; }
+  .lx-foot .bo-path__label { font-size: .55rem; letter-spacing: .03em; }
+  .lx-foot .bo-path__icon { width: 20px; height: 20px; }
+}
+
+/* Preserve the pinned hero scroll range; the landing has no footer. */
+.landing-body .landing-hero { height: 220svh; min-height: 220svh; }
+.lx-pin { position: sticky; top: 0; height: 100svh; }
+@media(prefers-reduced-motion:reduce) { .landing-body .landing-hero { height: auto; min-height: 100svh; } .lx-pin { position: relative; } }

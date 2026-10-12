@@ -99,7 +99,7 @@ body.landing-menu-open .landing-page-shell {
   justify-content: space-between;
   gap: 20px;
 }
-.landing-menu__identity { display: flex; align-items: center; gap: 12px; font: 500 1rem/1.2 "Inter Tight", sans-serif; letter-spacing: -.02em; }
+.landing-menu__identity { display: flex; align-items: center; gap: 12px; font: 500 1rem/1.2 "Space Grotesk", sans-serif; letter-spacing: -.02em; }
 .landing-menu__identity img { width: 40px; height: 40px; object-fit: contain; }
 .landing-menu__close {
   display: inline-flex;
@@ -131,7 +131,7 @@ body.landing-menu-open .landing-page-shell {
   padding: clamp(12px, 2vh, 25px) 0;
   color: #f0f7f7;
   text-decoration: none;
-  font: 500 clamp(3.3rem, 8vw, 8.5rem)/.95 "Inter Tight", sans-serif;
+  font: 500 clamp(3.3rem, 8vw, 8.5rem)/.95 "Space Grotesk", sans-serif;
   letter-spacing: -.065em;
   transform: translateY(115%);
   transition: transform .75s cubic-bezier(.22, 1, .36, 1), color .25s ease, padding-left .35s ease;
@@ -176,13 +176,13 @@ body.landing-menu-open .landing-page-shell {
   color: #eaf2f7;
 }
 .landing-footer__inner { max-width: 1400px; margin: auto; }
-.landing-footer__heading { margin: 0 0 clamp(48px, 8vw, 110px); max-width: 900px; font: 500 clamp(2.7rem, 5.8vw, 6rem)/1.05 "Inter Tight", sans-serif; letter-spacing: -.055em; }
+.landing-footer__heading { margin: 0 0 clamp(48px, 8vw, 110px); max-width: 900px; font: 500 clamp(2.7rem, 5.8vw, 6rem)/1.05 "Space Grotesk", sans-serif; letter-spacing: -.055em; }
 .landing-footer__heading a { color: #d9ff99; text-decoration: none; border-bottom: 1px solid rgba(217, 255, 153, .5); }
 .landing-footer__heading a:hover { border-color: currentColor; }
 .landing-footer__grid { display: grid; grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(130px, 1fr)); gap: 35px; border-top: 1px solid rgba(180, 220, 230, .24); padding-top: 30px; }
 .landing-footer__brand { display: flex; align-items: flex-start; gap: 12px; }
 .landing-footer__brand img { width: 45px; height: 45px; object-fit: contain; }
-.landing-footer__brand strong { font: 500 1.05rem/1.4 "Inter Tight", sans-serif; }
+.landing-footer__brand strong { font: 500 1.05rem/1.4 "Space Grotesk", sans-serif; }
 .landing-footer__brand p { margin: 7px 0 0; color: #a9c7d1; font-size: .82rem; line-height: 1.6; }
 .landing-footer h2 { color: #a9c7d1; font: 500 .68rem/1.4 "Inter", sans-serif; text-transform: uppercase; letter-spacing: .17em; margin: 0 0 20px; }
 .landing-footer ul { padding: 0; margin: 0; list-style: none; }
